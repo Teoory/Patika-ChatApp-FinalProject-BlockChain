@@ -114,7 +114,6 @@ form.login h1, form.register h1 {
 .verifyArea {
   display: flex;
   justify-content: center;
-  margin: 20px 0;
 }
 
 .MailVerified {

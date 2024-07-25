@@ -3,22 +3,30 @@
 
 -----
 -ADMIN-
-![1](https://github.com/Teoory/private-chat-app/assets/59116823/31add061-0427-4515-b7b5-c96b52e420c7)
+![AdminChat](https://github.com/user-attachments/assets/7e83c733-2270-4904-9c49-155038ec42c3)
 -----
 -USER-
-(old style)
-![3](https://github.com/Teoory/private-chat-app/assets/59116823/239f5142-6f29-48d4-ba13-b00113e9f1a7)
+![UserChat](https://github.com/user-attachments/assets/8c4d50d5-4e84-49b3-b7a6-d07317bf7dc2)
 -----
--ROOMS-
-![2](https://github.com/Teoory/private-chat-app/assets/59116823/cb4be9a7-d68f-4420-996e-add765a819ad)
+-QUEST BUY PREMIUM-
+![QuestPremiumPage](https://github.com/user-attachments/assets/032da5a6-83d6-48c5-b437-ec9ebc4af26c)
 -----
--LOGIN-
-![4](https://github.com/Teoory/private-chat-app/assets/59116823/c1871956-87c6-443e-bf9e-72db854786b7)
+-USER BUY PREMIUM-
+![UserPremiumPage](https://github.com/user-attachments/assets/dbee0a09-36bf-4995-b7d9-f0ebfc371603)
+-----
+-PROFILES-
+![adminProfile](https://github.com/user-attachments/assets/aa52dca2-8e14-40c4-a735-46731e5d938b)
+![PremiumPage](https://github.com/user-attachments/assets/c55c66d3-538d-44e4-bd82-10c024b88cd1)
+![User-QuestPage](https://github.com/user-attachments/assets/bcc93f9a-c898-4e57-8b81-2db0c81e4014)
 -----
 -REGISTER-
-![6](https://github.com/Teoory/private-chat-app/assets/59116823/84c3fbb8-1093-4434-9e5f-7f1bed609adc)
+![RegisterPage](https://github.com/user-attachments/assets/da5b93d5-f633-4f75-abc1-72cd8e1e5268)
 -----
--BANNED-<br>
-If you are banned, your messages will not appear in the chat and you will not be able to log in to your account again
-![x](https://github.com/Teoory/private-chat-app/assets/59116823/04ed1c02-cab6-403f-91db-d742ccaff12f)
+-LOGIN-
+![LoginPage](https://github.com/user-attachments/assets/a9accd49-684b-4263-80c4-5a4f18add5b8)
 -----
+-2FA VERIFICATION-
+![2fVerification](https://github.com/user-attachments/assets/cc62fca4-572d-4724-b13c-760282f44d56)
+-----
+-2FA VERIFICATION MAIL-
+![2fMail](https://github.com/user-attachments/assets/79583c7a-67d7-455f-a6f6-38713d31120b)

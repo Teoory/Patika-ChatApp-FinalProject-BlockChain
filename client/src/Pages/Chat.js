@@ -6,6 +6,7 @@ function Chat() {
     const { channelId } = useParams();
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
+    const [messageCooldown, setMessageCooldown] = useState(0);
     const { setUserInfo, userInfo } = useContext(UserContext);
     const messagesEndRef = useRef(null);
 
@@ -31,8 +32,16 @@ function Chat() {
     useEffect(() => {
         fetchMessages();
     }, [channelId]);
-    
-    
+
+    useEffect(() => {
+        if (messageCooldown > 0) {
+            const timer = setTimeout(() => {
+                setMessageCooldown(messageCooldown - 1);
+            }, 1000);
+            return () => clearTimeout(timer);
+        }
+    }, [messageCooldown]);
+
     const fetchMessages = async () => {
         try {
             const response = await fetch(`http://localhost:3030/messages/${channelId}`);
@@ -42,20 +51,24 @@ function Chat() {
             console.error('Error fetching messages:', error);
         }
     };
-    
-    // fetchMessagesToTime();
-    // function fetchMessagesToTime() {
-    //     setInterval(() => {
-    //         fetchMessages();
-    //     }, 30000); // 30 seconds
-    // };
 
     const handleSendMessage = async () => {
+        if (!userInfo || !userInfo.generatedUsername) {
+            console.error('User info is not available');
+            return;
+        }
+
+        const isAdmin = userInfo.role.includes('admin');
+        const isPremium = userInfo.role.includes('premium');
+        const isUser = userInfo.role.includes('user');
+        const isQuest = userInfo.role.includes('quest');
+
+        if (!isAdmin && !isPremium && messageCooldown > 0) {
+            console.log(`Tekrar mesaj gönderebilmek için kalan süren: ${messageCooldown}`);
+            return;
+        }
+
         try {
-            if (!userInfo || !userInfo.generatedUsername) {
-                console.error('User info is not available');
-                return;
-            }
             await fetch('http://localhost:3030/messages', {
                 method: 'POST',
                 headers: {
@@ -65,12 +78,16 @@ function Chat() {
             });
             setNewMessage('');
             fetchMessages();
+            if (!isAdmin && !isPremium) {
+                setMessageCooldown(30);
+            } else if (isUser) {
+                setMessageCooldown(10);
+            }
         } catch (error) {
             console.error('Error sending message:', error);
         }
     };
 
-    
     const handleHideMessage = async (messageId) => {
         try {
             await fetch(`http://localhost:3030/hideMessage/${messageId}`, {
@@ -106,7 +123,7 @@ function Chat() {
             console.error('Error banning user:', error);
         }
     };
-    
+
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();
@@ -122,13 +139,13 @@ function Chat() {
         scrollToBottom();
     }, [messages]);
 
-    const isAdmin = userInfo.role.includes('admin');
-    const isPremium = userInfo.role.includes('premium');
+    const isAdmin = userInfo?.role?.includes('admin');
+    const isPremium = userInfo?.role?.includes('premium');
 
     return (
         <div className="chat-container">
             <div className="chat-messages">
-            {messages.map((message, index) => (
+                {messages.map((message, index) => (
                     !message.hidden || isAdmin ? (
                         <div key={index} className={`chat-message ${message.highlighted ? 'highlight' : ''}`}>
                             {isAdmin && (
@@ -152,7 +169,6 @@ function Chat() {
                                     </svg>
                                 </button>
                             )}
-
                             {message.sender === userInfo.generatedUsername
                                 ?   <span className='senderYou'>
                                     {isAdmin && (
@@ -165,9 +181,7 @@ function Chat() {
                                     )}
 
                                     You{<span style={{fontSize: "9px", fontWeight: "800", color: "#6c8099"}}> ({message.sender})</span>}:
-
                                     </span>
-
                                 :   <span className='sender'>
                                         {message.senderInfo.role.includes('admin') ? (
                                             <span className="admin">ADMIN: </span>
@@ -180,8 +194,6 @@ function Chat() {
                                         )}
                                     </span>
                             }
-                            
-
                             {message.hidden && isAdmin ? (
                                 <span className='admin-hidden-text'>{message.content}</span>
                             ) : (
@@ -192,9 +204,24 @@ function Chat() {
                 ))}
                 <div ref={messagesEndRef} />
             </div>
+
+            {!isAdmin && !isPremium && messageCooldown > 0 ? (
+                <span> Sürenin kısalması için mail adresini doğrulayabilir veya premium hesaba geçiş yapabilirsiniz.</span>
+            )
+            : null
+            }
+            
             <div className="chat-input">
-                <input type="text" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} onKeyDown={handleKeyDown} />
-                <button onClick={handleSendMessage}>Send</button>
+                <input
+                    type="text"
+                    value={newMessage}
+                    onChange={(e) => setNewMessage(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    disabled={!isAdmin && !isPremium && messageCooldown > 0}
+                    placeholder={!isAdmin && !isPremium && messageCooldown > 0 ? `Bu süre içerisinde tekrar mesaj gönderemezsiniz: ${messageCooldown}` : 'Type a message'}
+                />
+                
+                <button onClick={handleSendMessage} disabled={!isAdmin && !isPremium && messageCooldown > 0}>Send</button>
             </div>
         </div>
     );

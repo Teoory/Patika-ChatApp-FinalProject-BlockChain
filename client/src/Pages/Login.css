@@ -98,6 +98,9 @@ form.login h1, form.register h1 {
 }
 
 .requestArea button {
+  color: #edeffd;
+  font-weight: 800;
+  text-transform: uppercase;
   background-color: #1d5700;
   width: 330px;
   border-radius: 0 0 25px 25px;

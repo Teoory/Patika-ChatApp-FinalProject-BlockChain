@@ -9,6 +9,8 @@ import Login from '../Pages/Login';
 import Register from '../Pages/RegisterPage';
 import Verify from '../Pages/VerifyPage';
 import Profile from '../Pages/ProfilPage';
+import Premium from '../Pages/PremiumPage';
+import Purchase from '../Pages/PurchasePage';
 
 import Chat from '../Pages/Chat';
 import AddChannel from '../Pages/AddChannel';
@@ -51,6 +53,8 @@ const AppRouter = () => {
             <Route path="/chat/:channelId" element={<Chat />} />
             <Route path="/verify" element={<Verify />} />
             <Route path="/profile/:username" element={<Profile />} />
+            <Route path="/premium" element={<Premium />} />
+            <Route path="/purchase" element={<Purchase />} />
           </>
         )}
 

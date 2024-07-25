@@ -66,7 +66,7 @@ function Header() {
                     <Link to="/addchannel">AddChannel</Link>
                 )}
                 {!isPremium && (
-                    <Link to="/buy-premium">Buy Premium</Link>
+                    <Link className='premiumHeader' to="/premium">Buy Premium</Link>
                 )}
                     <a onClick={logout} style={{ cursor: 'pointer' }}>Logout</a>
                     </>

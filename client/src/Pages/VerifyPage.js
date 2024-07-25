@@ -63,7 +63,7 @@ const VerifyPage = () => {
                     required
                     onChange={ev => setVerificationCode(ev.target.value)}
                 />
-                <button>E-posta Doğrula</button>
+                <button>E-Postayı Doğrula</button>
             </form>
             <div className='requestArea'>
                 <button onClick={requestNewCode}>Yeni Kod İste</button>

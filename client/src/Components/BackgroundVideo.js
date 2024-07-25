@@ -29,8 +29,8 @@ const BackgroundVideo = () => {
             setTimeout(() => {
                 setCurrentVideo((prevVideo) => getRandomIndex(prevVideo));
                 setTransitioning(false);
-            }, 1000);
-        }, 10000);
+            }, 1500);
+        }, 60000);
 
         return () => clearInterval(interval);
     }, []);

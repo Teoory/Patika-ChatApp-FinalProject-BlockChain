@@ -160,18 +160,52 @@ header .links a {
 }
 
 .admin {
-  -webkit-text-fill-color: #0000;
-  background: linear-gradient(90deg,#f32170,#ff6b08,#cf23cf);
-  -webkit-background-clip: text;
   font-weight: 700 !important;
+  background: linear-gradient(90deg,#f32170,#ff6b08,#cf23cf,#ccc,#f32170,#ff6b08,#cf23cf);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient 3s linear infinite;
+  user-select: none;
 }
 
 .premium {
-  -webkit-text-fill-color: #0000;
-  background: linear-gradient(90deg,#21b1f3,#08ff31,#cfb523);
-  -webkit-background-clip: text;
   font-weight: 700 !important;
+  background: linear-gradient(120deg,#21b1f3,#00510d,#cfb523,#f32170,#21b1f3,#00510d,#cfb523);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient 3s linear infinite;
+  user-select: none;
 }
+
+.premiumHeader {
+  font-weight: 700 !important;
+  background: linear-gradient(120deg, #21b1f3, #00510d, #cfb523, #f32170, #21b1f3, #00510d, #cfb523);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient 3s linear infinite;
+}
+
+.premiumAvantage {
+  font-weight: 700 !important;
+  background: linear-gradient(120deg, #FF3CAC, #784BA0, #2B86C5, #FF3CAC, #784BA0, #2B86C5);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient 9s linear infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
 
 .sender .premium {
   font-size: 10px;
@@ -421,4 +455,59 @@ button.highlight {
 
 .user {
   color: grey;
+}
+
+/* PREMIUN PAGE */
+.prePage {
+  display: grid;
+  justify-items: center;
+}
+
+.prePage span {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #7c00ad;
+}
+
+.premium-page {
+  background: #fff;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  border-radius: 15px;
+}
+
+.checkbox-container {
+  margin-top: 20px;
+}
+
+.continue-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.continue-button2 {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.continue-button:hover {
+  background-color: #0056b3;
+}
+
+.continue-button2:hover {
+  background-color: #00510d;
 }

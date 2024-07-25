@@ -218,7 +218,7 @@ function Chat() {
                     onChange={(e) => setNewMessage(e.target.value)}
                     onKeyDown={handleKeyDown}
                     disabled={!isAdmin && !isPremium && messageCooldown > 0}
-                    placeholder={!isAdmin && !isPremium && messageCooldown > 0 ? `Bu süre içerisinde tekrar mesaj gönderemezsiniz: ${messageCooldown}` : 'Type a message'}
+                    placeholder={!isAdmin && !isPremium && messageCooldown > 0 ? `Bu süre içerisinde tekrar mesaj gönderemezsiniz: ${messageCooldown} saniye`  : 'Type a message'}
                 />
                 
                 <button onClick={handleSendMessage} disabled={!isAdmin && !isPremium && messageCooldown > 0}>Send</button>

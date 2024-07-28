@@ -11,7 +11,7 @@ function Chat() {
     const messagesEndRef = useRef(null);
 
     useEffect(() => {
-        fetch('http://localhost:3030/profile', {
+        fetch('https://patika-chat-app-final-project-block-chain.vercel.app/profile', {
             credentials: 'include',
         })
             .then(response => {
@@ -44,7 +44,7 @@ function Chat() {
 
     const fetchMessages = async () => {
         try {
-            const response = await fetch(`http://localhost:3030/messages/${channelId}`);
+            const response = await fetch(`https://patika-chat-app-final-project-block-chain.vercel.app/messages/${channelId}`);
             const data = await response.json();
             setMessages(data);
         } catch (error) {
@@ -69,7 +69,7 @@ function Chat() {
         }
 
         try {
-            await fetch('http://localhost:3030/messages', {
+            await fetch('https://patika-chat-app-final-project-block-chain.vercel.app/messages', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -90,7 +90,7 @@ function Chat() {
 
     const handleHideMessage = async (messageId) => {
         try {
-            await fetch(`http://localhost:3030/hideMessage/${messageId}`, {
+            await fetch(`https://patika-chat-app-final-project-block-chain.vercel.app/hideMessage/${messageId}`, {
                 method: 'POST'
             });
             console.log('Message hidden successfully');
@@ -102,7 +102,7 @@ function Chat() {
 
     const handleHighlightMessage = async (messageId) => {
         try {
-            await fetch(`http://localhost:3030/highlightMessage/${messageId}`, {
+            await fetch(`https://patika-chat-app-final-project-block-chain.vercel.app/highlightMessage/${messageId}`, {
                 method: 'POST'
             });
             console.log('Message highlighted successfully');
@@ -114,7 +114,7 @@ function Chat() {
 
     const handleBanUser = async (userId) => {
         try {
-            await fetch(`http://localhost:3030/banUser/${userId}`, {
+            await fetch(`https://patika-chat-app-final-project-block-chain.vercel.app/banUser/${userId}`, {
                 method: 'POST'
             });
             console.log('User banned successfully');

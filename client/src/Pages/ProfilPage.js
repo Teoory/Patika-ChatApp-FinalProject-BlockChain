@@ -9,13 +9,13 @@ const ProfilPage = () => {
     const { setUserInfo, userInfo } = useContext(UserContext);
 
     useEffect(() => {
-        fetch(`http://localhost:3030/profile/${username}`)
+        fetch(`https://patika-chat-app-final-project-block-chain.vercel.app/profile/${username}`)
             .then(response => response.json())
             .then(data => setUserProfile(data));
     }, [username]);
 
     useEffect(() => {
-        fetch('http://localhost:3030/profile', {
+        fetch('https://patika-chat-app-final-project-block-chain.vercel.app/profile', {
           credentials: 'include',
         })
         .then(response => {
@@ -34,7 +34,7 @@ const ProfilPage = () => {
 
 
     const handleUsernameChange = () => {
-        fetch('http://localhost:3030/change-generated-username', {
+        fetch('https://patika-chat-app-final-project-block-chain.vercel.app/change-generated-username', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

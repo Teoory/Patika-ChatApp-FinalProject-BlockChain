@@ -7,7 +7,7 @@ function AddChatChannel({ onChannelAdded }) {
 
     const handleAddChannel = async () => {
         try {
-            const response = await fetch('http://localhost:3030/channels', {
+            const response = await fetch('https://patika-chat-app-final-project-block-chain.vercel.app/channels', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

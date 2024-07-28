@@ -7,7 +7,7 @@ const Home = () => {
     const [channels, setChannels] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:3030/profile', {
+        fetch('https://patika-chat-app-final-project-block-chain.vercel.app/profile', {
           credentials: 'include',
         })
         .then(response => {
@@ -31,7 +31,7 @@ const Home = () => {
 
     const fetchChannels = async () => {
         try {
-            const response = await fetch('http://localhost:3030/channels');
+            const response = await fetch('https://patika-chat-app-final-project-block-chain.vercel.app/channels');
             const data = await response.json();
             setChannels(data);
         } catch (error) {

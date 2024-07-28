@@ -11,7 +11,7 @@ const Login = () => {
 
     async function login(ev) {
         ev.preventDefault();
-        const response = await fetch('http://localhost:3030/login', {
+        const response = await fetch('https://patika-chat-app-final-project-block-chain.vercel.app/login', {
             method: 'POST',
             mode: 'cors',
             redirect: 'follow',

@@ -7,7 +7,7 @@ function Header() {
 
     useEffect(() => {
         try {
-            fetch('http://localhost:3030/profile', {
+            fetch('https://patika-chat-app-final-project-block-chain.vercel.app/profile', {
                 credentials: 'include',
             }).then(response => {
                 if (!response.ok) {
@@ -39,7 +39,7 @@ function Header() {
     }
     
     function logout() {
-        fetch('http://localhost:3030/logout', {
+        fetch('https://patika-chat-app-final-project-block-chain.vercel.app/logout', {
             credentials: 'include',
             method: 'POST',
         }).then(() => {

@@ -7,7 +7,7 @@ const PurchasePage = () => {
 
     const handleTransfer = async () => {
         try {
-            const response = await fetch('http://localhost:3030/transfer', {
+            const response = await fetch('https://patika-chat-app-final-project-block-chain.vercel.app/transfer', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

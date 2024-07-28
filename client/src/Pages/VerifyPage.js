@@ -10,7 +10,7 @@ const VerifyPage = () => {
 
     
   useEffect(() => {
-        fetch('http://localhost:3030/profile', {
+        fetch('https://patika-chat-app-final-project-block-chain.vercel.app/profile', {
           credentials: 'include',
         }).then(response => {
           response.json().then(userInfo => {
@@ -23,7 +23,7 @@ const VerifyPage = () => {
     const verifyEmail = async (ev) => {
         ev.preventDefault();
 
-        const response = await fetch('http://localhost:3030/verify-email', {
+        const response = await fetch('https://patika-chat-app-final-project-block-chain.vercel.app/verify-email', {
             method: 'POST',
             body: JSON.stringify({ verificationCode }),
             headers: { 'Content-Type': 'application/json' },
@@ -38,7 +38,7 @@ const VerifyPage = () => {
     };
 
     const requestNewCode = async () => {
-        const response = await fetch('http://localhost:3030/request-verify-code', {
+        const response = await fetch('https://patika-chat-app-final-project-block-chain.vercel.app/request-verify-code', {
             method: 'POST',
             body: JSON.stringify({ email }),
             headers: { 'Content-Type': 'application/json' },

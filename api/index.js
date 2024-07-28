@@ -18,7 +18,6 @@ const crypto = require ('crypto');
 const { connect } = require('http2');
 const { v4: uuidv4 } = require('uuid');
 const { W3SSdk } = require('@circle-fin/w3s-pw-web-sdk');
-const { initiateTransfer } = require('./helper_functions');
 const { error } = require('console');
 const app = express ();
 require ('dotenv').config ();
@@ -33,7 +32,7 @@ const secret = generate_secret();
 
 
 const corsOptions = {
-    origin: ['http://localhost:3000', 'http://localhost:3030', 'https://patika-chat-app-final-project-block-chain.vercel.app'],
+    origin: ['http://localhost:3000', 'http://localhost:3030', 'https://patika-chat-app-final-project-block-chain.vercel.app', 'https://circle-chat-app-finalproject.vercel.app'],
     credentials: true,
     methods: 'GET, POST, PUT, DELETE, OPTIONS',
     allowedHeaders: 'Content-Type, Authorization',

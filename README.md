@@ -1,9 +1,16 @@
-Kayıt sırasında otomatik olarak challange appId, userId, userToken, encryptionKey, challengeId otomatik olarak oluşturulmaktadır daha sonrasında oluşturulan challengeId hesabınıza entegre olur.
+Youtube video: https://www.youtube.com/watch?v=GsyEOkfhzK0
+
+Kayıt sırasında otomatik olarak challange appId, userId, userToken, encryptionKey, challengeId otomatik olarak oluşturulmaktadır daha sonrasında oluşturulan challengeId hesabınıza entegre olur.<br>
+
+Süre yetmediği için premium hesap satın alma işlemlerini yetiştiremedim, fakat ilerleyen zamanlarda kullanıcıya oluşturulan wallet üzerinden transfer başlatarak premium hesap satışı getirmek için uğraşacağım.
+
 
 İstediğiniz kanalda gizli kimliğinizle dilediğiniz gibi konuşabilirsiniz.<br><br>
 
 -----
-During registration, challange appId, userId, userToken, encryptionKey, challengeId are automatically created and then the created challengeId is integrated into your account. 
+During registration, challange appId, userId, userToken, encryptionKey, challengeId are automatically created and then the created challengeId is integrated into your account.<br>
+
+Due to lack of time, I could not complete the premium account purchases, but in the future I will try to bring premium account sales by initiating a transfer through the wallet created for the user.
 
 You can speak as you wish with your secret identity on any channel you want.<br><br>
 

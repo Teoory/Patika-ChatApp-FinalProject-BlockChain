@@ -184,10 +184,12 @@ function Chat() {
                                     </span>
                                 :   <span className='sender'>
                                         {message.senderInfo.role.includes('admin') ? (
-                                            <span className="admin">ADMIN: </span>
+                                            <span className="senderAdmin">
+                                                <span className="admin">⚔️(ADMIN)</span> {message.sender}: 
+                                            </span>
                                         ) : message.senderInfo.role.includes('premium') ? (
                                             <span className="senderVip">
-                                                <span className="premium">(PREMIUM)</span> {message.sender}:
+                                                <span className="premium">💎(PREMIUM)</span> {message.sender}:
                                             </span>
                                         ) : (
                                             <span className="sender">{message.sender}:</span>

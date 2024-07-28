@@ -14,12 +14,22 @@ const fs = require ('fs');
 const sesion = require ('express-session');
 const nodemailer = require('nodemailer');
 const ws = require ('ws');
+const crypto = require ('crypto');
 const { connect } = require('http2');
+const { v4: uuidv4 } = require('uuid');
+const { W3SSdk } = require('@circle-fin/w3s-pw-web-sdk');
+const { initiateTransfer } = require('./helper_functions');
+const { error } = require('console');
 const app = express ();
 require ('dotenv').config ();
 
 const salt = bcrypt.genSaltSync(10);
-const secret = process.env.SECRET;
+
+const generate_secret = () => {
+    const secret = crypto.randomBytes(32).toString("hex");
+    return secret;
+};
+const secret = generate_secret();
 
 
 const corsOptions = {
@@ -130,6 +140,152 @@ app.post('/verify-email', async (req, res) => {
 
 
 //? Register & Login
+
+const getAppId = async () => {
+    const options = {
+        method: 'GET',
+        url: 'https://api.circle.com/v1/w3s/config/entity',
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer TEST_API_KEY:a4f681a3a29bf1bed4003bea2d356275:fd0cffd466303adf845a78b873ec67af`,
+        },
+    };
+
+    try {
+        const response = await fetch(options.url, {
+            method: options.method,
+            headers: options.headers,
+        });
+        const data = await response.json();
+        console.log('getAppId response:', data.data.appId);
+        return data.data.appId;
+    }
+    catch (error) {
+        console.error('Error getting app ID:', error);
+    }
+};
+
+const createUser = async () => {
+    const userId = uuidv4();
+    const options = {
+        method: 'POST',
+        url: 'https://api.circle.com/v1/w3s/users',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer TEST_API_KEY:a4f681a3a29bf1bed4003bea2d356275:fd0cffd466303adf845a78b873ec67af`,
+        },
+        body: JSON.stringify({ userId: userId }),
+    };
+
+    try {
+        const response = await fetch(options.url, {
+            method: options.method,
+            headers: options.headers,
+            body: options.body,
+        });
+        const data = await response.json();
+        console.log('createUser response:', data.data.id);
+        return { userId: data.data.id };
+    } catch (error) {
+        console.error('Error creating user:', error);
+    }
+};
+
+const acquireSessionToken = async (userId) => {
+    console.log('acquireSessionToken userId:', userId);
+    const options = {
+        method: 'POST',
+        url: 'https://api.circle.com/v1/w3s/users/token',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer TEST_API_KEY:a4f681a3a29bf1bed4003bea2d356275:fd0cffd466303adf845a78b873ec67af`,
+        },
+        body: JSON.stringify({ userId: userId }),
+    };
+
+    try {
+        const response = await fetch(options.url, {
+            method: options.method,
+            headers: options.headers,
+            body: options.body,
+        });
+        const data = await response.json();
+        console.log('acquireSessionToken response:', data.data.userToken, " || ", data.data.encryptionKey);
+        return {
+            userToken: data.data.userToken,
+            encryptionKey: data.data.encryptionKey,
+        };
+    } catch (error) {
+        console.error('Error acquiring session token:', error);
+    }
+};
+
+const initializeUser = async (userToken) => {
+    const idempotencyKey = uuidv4();
+    const options = {
+        method: 'POST',
+        url: 'https://api.circle.com/v1/w3s/user/initialize',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer TEST_API_KEY:a4f681a3a29bf1bed4003bea2d356275:fd0cffd466303adf845a78b873ec67af`,
+            'X-User-Token': userToken,
+        },
+        body: JSON.stringify({ idempotencyKey: idempotencyKey, blockchains: ['MATIC-AMOY'] }),
+    };
+
+    try {
+        const response = await fetch(options.url, {
+            method: options.method,
+            headers: options.headers,
+            body: options.body,
+        });
+        const data = await response.json();
+        return data.data.challengeId;
+    } catch (error) {
+        console.error('Error initializing user:', error);
+    }
+};
+
+// const createWallet = async (challengeId, appId, userToken, encryptionKey) => {
+//     const sdk = new W3SSdk();
+//     console.log('createWallet');
+
+//     sdk.setAppSettings({
+//         appId: appId,
+//     });
+//     console.log("set the app settings");
+//     sdk.setAuthentication({
+//         userToken: userToken,
+//         encryptionKey: encryptionKey,
+//     });
+//     console.log("set the authentication");
+
+//     return new Promise((resolve, reject) => {
+//         sdk.execute(challengeId, (error, result) => {
+//             console.log("INSIDE THE EXECUTE METHOD");
+//             if (error) {
+//                 console.log(
+//                     `${error?.code?.toString() || "Unknown code"}: ${
+//                         error?.message ?? "Error!"
+//                     }`
+//                 );
+//                 reject(error);
+//                 return;
+//             }
+
+//             console.log(`Challenge: ${result.type}`);
+//             console.log(`status: ${result.status}`);
+
+//             if (result.data) {
+//                 console.log(`signature: ${result.data?.signature}`);
+//                 resolve(result);
+//             } else {
+//                 reject(new Error('No result data'));
+//             }
+//         });
+//     });
+// };
+
 app.post('/register', async (req, res) => {
     const { email, username, generatedUsername, password } = req.body;
     try {
@@ -138,15 +294,23 @@ app.post('/register', async (req, res) => {
             return res.status(400).json({ message: 'User already exists' });
         }
 
+        const appId = await getAppId();
+        const newUser = await createUser();
+        const sessionData = await acquireSessionToken(newUser.userId);
+        const challengeId = await initializeUser(sessionData.userToken, sessionData.encryptionKey);
+
+        // const walletCreationResult = await createWallet(challengeId, appId, sessionData.userToken, sessionData.encryptionKey);
+
         const userDoc = await User.create({
             email,
             username,
             generatedUsername: generateRandomPassword(),
             password: bcrypt.hashSync(password, salt),
             role: ['quest'],
-            isBanned: false
+            isBanned: false,
+            challangeId: challengeId,
         });
-        res.json(userDoc);
+        res.json({userDoc});
     } catch (error) {
         console.error('Error registering user:', error);
         res.status(500).json({ message: 'User registration failed' });

@@ -1,5 +1,11 @@
+Kayıt sırasında otomatik olarak challange appId, userId, userToken, encryptionKey, challengeId otomatik olarak oluşturulmaktadır daha sonrasında oluşturulan challengeId hesabınıza entegre olur.
+
 İstediğiniz kanalda gizli kimliğinizle dilediğiniz gibi konuşabilirsiniz.<br><br>
 
+-----
+During registration, challange appId, userId, userToken, encryptionKey, challengeId are automatically created and then the created challengeId is integrated into your account. 
+
+You can speak as you wish with your secret identity on any channel you want.<br><br>
 
 -----
 -ADMIN-

@@ -17,7 +17,7 @@ You can speak as you wish with your secret identity on any channel you want.<br>
 
 -----
 -ADMIN-
-![AdminChat](https://github.com/user-attachments/assets/7e83c733-2270-4904-9c49-155038ec42c3)
+![352246805-7e83c733-2270-4904-9c49-155038ec42c3](https://github.com/user-attachments/assets/dd1831b6-53fd-4f11-bd2c-f3b8387689d5)
 -----
 -PREMIUM
 ![premium chat](https://github.com/user-attachments/assets/98f95010-b682-4642-b509-32b1070d6ed2)

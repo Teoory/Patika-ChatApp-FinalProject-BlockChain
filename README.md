@@ -1,4 +1,5 @@
 Youtube video: https://www.youtube.com/watch?v=GsyEOkfhzK0
+Test: https://circle-chat-app-finalproject.vercel.app/login
 
 Kayıt sırasında otomatik olarak challange appId, userId, userToken, encryptionKey, challengeId otomatik olarak oluşturulmaktadır daha sonrasında oluşturulan challengeId hesabınıza entegre olur.<br>
 
